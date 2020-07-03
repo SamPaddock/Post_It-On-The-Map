@@ -9,23 +9,31 @@
 /* Begin PBXBuildFile section */
 		FCFE8F1B24AB3072005D7D14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F1A24AB3072005D7D14 /* AppDelegate.swift */; };
 		FCFE8F1D24AB3072005D7D14 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F1C24AB3072005D7D14 /* SceneDelegate.swift */; };
-		FCFE8F1F24AB3072005D7D14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F1E24AB3072005D7D14 /* ViewController.swift */; };
+		FCFE8F1F24AB3072005D7D14 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F1E24AB3072005D7D14 /* LoginViewController.swift */; };
 		FCFE8F2224AB3072005D7D14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCFE8F2024AB3072005D7D14 /* Main.storyboard */; };
 		FCFE8F2524AB3072005D7D14 /* OnMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F2324AB3072005D7D14 /* OnMap.xcdatamodeld */; };
 		FCFE8F2724AB3075005D7D14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCFE8F2624AB3075005D7D14 /* Assets.xcassets */; };
 		FCFE8F2A24AB3075005D7D14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCFE8F2824AB3075005D7D14 /* LaunchScreen.storyboard */; };
+		FCFE8F3224AF318C005D7D14 /* MapListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F3124AF318C005D7D14 /* MapListViewController.swift */; };
+		FCFE8F3424AF31A2005D7D14 /* MapSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F3324AF31A2005D7D14 /* MapSceneViewController.swift */; };
+		FCFE8F3624AF321C005D7D14 /* PostInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F3524AF321C005D7D14 /* PostInfoViewController.swift */; };
+		FCFE8F3824AF3265005D7D14 /* AddInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F3724AF3265005D7D14 /* AddInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FCFE8F1724AB3072005D7D14 /* OnMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFE8F1A24AB3072005D7D14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCFE8F1C24AB3072005D7D14 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FCFE8F1E24AB3072005D7D14 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FCFE8F1E24AB3072005D7D14 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FCFE8F2124AB3072005D7D14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FCFE8F2424AB3072005D7D14 /* OnMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OnMap.xcdatamodel; sourceTree = "<group>"; };
 		FCFE8F2624AB3075005D7D14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCFE8F2924AB3075005D7D14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCFE8F2B24AB3075005D7D14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCFE8F3124AF318C005D7D14 /* MapListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapListViewController.swift; sourceTree = "<group>"; };
+		FCFE8F3324AF31A2005D7D14 /* MapSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSceneViewController.swift; sourceTree = "<group>"; };
+		FCFE8F3524AF321C005D7D14 /* PostInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInfoViewController.swift; sourceTree = "<group>"; };
+		FCFE8F3724AF3265005D7D14 /* AddInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +68,11 @@
 			children = (
 				FCFE8F1A24AB3072005D7D14 /* AppDelegate.swift */,
 				FCFE8F1C24AB3072005D7D14 /* SceneDelegate.swift */,
-				FCFE8F1E24AB3072005D7D14 /* ViewController.swift */,
+				FCFE8F1E24AB3072005D7D14 /* LoginViewController.swift */,
+				FCFE8F3124AF318C005D7D14 /* MapListViewController.swift */,
+				FCFE8F3324AF31A2005D7D14 /* MapSceneViewController.swift */,
+				FCFE8F3724AF3265005D7D14 /* AddInfoViewController.swift */,
+				FCFE8F3524AF321C005D7D14 /* PostInfoViewController.swift */,
 				FCFE8F2024AB3072005D7D14 /* Main.storyboard */,
 				FCFE8F2624AB3075005D7D14 /* Assets.xcassets */,
 				FCFE8F2824AB3075005D7D14 /* LaunchScreen.storyboard */,
@@ -141,7 +153,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCFE8F1F24AB3072005D7D14 /* ViewController.swift in Sources */,
+				FCFE8F3424AF31A2005D7D14 /* MapSceneViewController.swift in Sources */,
+				FCFE8F3624AF321C005D7D14 /* PostInfoViewController.swift in Sources */,
+				FCFE8F3824AF3265005D7D14 /* AddInfoViewController.swift in Sources */,
+				FCFE8F3224AF318C005D7D14 /* MapListViewController.swift in Sources */,
+				FCFE8F1F24AB3072005D7D14 /* LoginViewController.swift in Sources */,
 				FCFE8F2524AB3072005D7D14 /* OnMap.xcdatamodeld in Sources */,
 				FCFE8F1B24AB3072005D7D14 /* AppDelegate.swift in Sources */,
 				FCFE8F1D24AB3072005D7D14 /* SceneDelegate.swift in Sources */,
