@@ -55,7 +55,6 @@ class PostInfoViewController: UIViewController, MKMapViewDelegate {
         var mapPin = mapScene.dequeueReusableAnnotationView(withIdentifier: "pin")
         
         if mapPin == nil {
-            print("pin")
             mapPin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
             mapPin?.canShowCallout = true
             mapPin?.backgroundColor = .clear
@@ -91,19 +90,30 @@ class PostInfoViewController: UIViewController, MKMapViewDelegate {
     
     func uploadStudentData(){
         guard let studentPublicInfo = studentPublicInformation, var studentLocation = studentInfo else {return}
-        studentLocation.firstName = studentPublicInformation.firstName
-        studentLocation.lastName = studentPublicInformation.lastName
-        studentLocation.uniqueKey = studentPublicInformation.key
-        udacityAPICalls.uploadStudentLocation(studentInfo: studentLocation) { success, error in
-            
-            if success {
-                self.present(AlertMessage.uploadSccuess(), animated: true, completion: nil)
-            } else {
-                self.present(AlertMessage.uploadFail(), animated: true, completion: nil)
-            }
-            let cv = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mapTabBar")
-            self.present(cv, animated: true, completion: nil)
+        studentLocation.firstName = studentPublicInfo.firstName
+        studentLocation.lastName = studentPublicInfo.lastName
+        studentLocation.uniqueKey = studentPublicInfo.key
+        //TODO: issue here
+        udacityAPICalls.uploadStudentLocation(studentInfo: studentLocation){ (success, error) in
+                if success {
+                    self.present(AlertMessage.uploadSccuess(), animated: true){
+                        self.returnToMapView()
+                    }
+                } else {
+                    self.present(AlertMessage.uploadFail(), animated: true){
+                        self.returnToMapView()
+                    }
+                }
         }
+    }
+    
+
+    
+    func returnToMapView(){
+        self.presentingViewController?.dismiss(animated: true, completion: {
+            let secondPresentingVC = self.presentingViewController?.presentingViewController;
+            secondPresentingVC?.dismiss(animated: true, completion: {});
+        });
     }
     
 }

@@ -37,6 +37,8 @@ class MapListViewController: UIViewController, UITableViewDataSource, UITableVie
                 return
             }
             self.studentLocation = data
+            print("Reloading data")
+            print(data)
             self.mapTableView.reloadData()
         }
     }

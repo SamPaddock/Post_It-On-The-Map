@@ -142,16 +142,21 @@ class AlertMessage{
         //HTTP Error range
         let clientError = 400..<500
         let serverError = 500..<600
+        let connectionError = -1010 ..< -1000
+        let inCorrectUser = 4864 ..< 4875
         //Error alert title and message
         var title: String = ""
         var message: String = ""
         //check error type
-        if clientError.contains(errorCode){
+        if clientError.contains(errorCode) || connectionError.contains(errorCode){
             title = AlertMessage.alertTitle.networkClientIssue.title
             message = AlertMessage.alertMessage.networkDown.message
         } else if serverError.contains(errorCode) {
             title = AlertMessage.alertTitle.networkServerIssue.title
             message = AlertMessage.alertMessage.serverDown.message
+        } else if inCorrectUser.contains(errorCode) {
+            title = AlertMessage.alertTitle.loginFailed.title
+            message = AlertMessage.alertMessage.incorrectCredentials.message
         } else {
             title = AlertMessage.alertTitle.defaultTitle.title
             message = AlertMessage.alertMessage.defaultMessage.message

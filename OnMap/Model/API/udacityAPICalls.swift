@@ -15,7 +15,7 @@ class udacityAPICalls {
     
     struct sessionData{
         static var sessionId = ""
-        static var accountKey = 0
+        static var accountKey = ""
     }
     
     //MARK: API endpoint links
@@ -40,18 +40,26 @@ class udacityAPICalls {
     
     //MARK: Get API function
     
-    class func downloadAPIRequest<ResponseType: Decodable>(_ url: URL,_ responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void){
+    class func downloadAPIRequest<ResponseType: Decodable>(_ url: URL,_ responseType: ResponseType.Type, secure: Bool, completion: @escaping (ResponseType?, Error?) -> Void){
         //Request Task Session
         var requestURL = URLRequest(url: url)
         requestURL.addValue("application/json", forHTTPHeaderField: "Content-Type")
         requestURL.addValue("application/json", forHTTPHeaderField: "Accept")
-
+        
         let task = sessionURL.dataTask(with: requestURL){ data,response,error in
             guard let data = data else {
                 DispatchQueue.main.async { completion(nil, error) }
                 return
             }
             
+            let newData: Data!
+            if secure {
+                let range = 5..<data.count
+                newData = data.subdata(in: range)
+            } else {
+                newData = data
+            }
+
             let decoder = JSONDecoder()
             
             do{
@@ -67,7 +75,7 @@ class udacityAPICalls {
     
     //MARK: POST API function
     
-    class func uploadAPIRequest<RequestType: Encodable,ResponseType: Decodable>(_ url: URL,_ uploadMethod: HTTPMethods ,_ urlBody: RequestType,_ responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void){
+    class func uploadAPIRequest<RequestType: Encodable,ResponseType: Decodable>(_ url: URL,_ uploadMethod: HTTPMethods ,_ urlBody: RequestType,_ responseType: ResponseType.Type, secure: Bool, completion: @escaping (ResponseType?, Error?) -> Void){
         
         //URL configuration
         var requestURL = URLRequest(url: url)
@@ -77,19 +85,19 @@ class udacityAPICalls {
         requestURL.addValue("application/json", forHTTPHeaderField: "Accept")
         //Request Task Session
         let task = sessionURL.dataTask(with: requestURL){ data,response,error in
-            print(data)
-            print(response)
-            print(error)
             guard let data = data else {
                 DispatchQueue.main.async { completion(nil, error) }
                 return
             }
             
-            let range = 5..<data.count
-            let newData = data.subdata(in: range)
+            let newData: Data!
+            if secure {
+                let range = 5..<data.count
+                newData = data.subdata(in: range)
+            } else {
+                newData = data
+            }
             
-            print(newData)
-            print(String(data: newData, encoding: .utf8))
             
             let decoder = JSONDecoder()
             
@@ -107,9 +115,9 @@ class udacityAPICalls {
     //MARK: Create session
     
     class func createUserSession(_ username: String, _ password: String, completion: @escaping (Bool, Error?) -> Void){
-        let urlBody = Udacity(udacity: Auth(username: username, passowrd: password))
+        let urlBody = Udacity(udacity: Auth(username: username, password: password))
         
-        uploadAPIRequest(apiEndpoints.session.url, .post, urlBody, SessionPOST.self){ response, error in
+        uploadAPIRequest(apiEndpoints.session.url, .post, urlBody, SessionPOST.self, secure: true){ response, error in
             if let response = response {
                 sessionData.sessionId = response.session.id
                 sessionData.accountKey = response.account.key
@@ -124,14 +132,21 @@ class udacityAPICalls {
     //MARK: Get User Info
     
     class func getUserInfo(completion: @escaping (User?, Error?) -> Void){
-        let url = URL(string: apiEndpoints.user.stringValue + sessionData.sessionId)!
-        downloadAPIRequest(url, User.self) { (response, error) in
-            if let response = response {
-                completion(response, nil)
-            } else {
-                completion(nil, error)
+        let url = URL(string: apiEndpoints.user.stringValue + "/" + sessionData.accountKey)!
+        let task = sessionURL.dataTask(with: url){ data,response,error in
+            let range = 5..<data!.count
+            let newData = data?.subdata(in: range)
+            let decoder = JSONDecoder()
+            
+            do{
+                let decodedObject = try decoder.decode(User.self, from: newData!)
+                DispatchQueue.main.async { completion(decodedObject, nil) }
+            } catch {
+                DispatchQueue.main.async { completion(nil, error) }
             }
+            
         }
+        task.resume()
     }
     
     //MARK: Delete session
@@ -148,7 +163,7 @@ class udacityAPICalls {
           request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
         let task = sessionURL.dataTask(with: request) { data, response, error in
-            sessionData.accountKey = 0
+            sessionData.accountKey = ""
             sessionData.sessionId = ""
             DispatchQueue.main.async { completion() }
         }
@@ -159,7 +174,7 @@ class udacityAPICalls {
     
     class func retrieveStudetLocations(completion: @escaping (StudentInformationData?) -> Void){
         var url = URL(string: apiEndpoints.studentLocation.stringValue+"?limit=100&skip=5&order=-updatedAt")
-        downloadAPIRequest(url!, StudentInformationData.self){ response, error in
+        downloadAPIRequest(url!, StudentInformationData.self, secure: false){ response, error in
             if let response = response {
                 completion(response)
             }
@@ -170,9 +185,9 @@ class udacityAPICalls {
     //MARK: Upload Students location
     
     class func uploadStudentLocation(studentInfo: StudentInformation,completion: @escaping (Bool, Error?) -> Void){
-        let urlBody = studentInfo
-        
-        uploadAPIRequest(apiEndpoints.studentLocation.url, .post, urlBody, studentLocationPOST.self){ response, error in
+        let urlBody = "{\"uniqueKey\": \"\(studentInfo.uniqueKey!)\", \"firstName\": \"\(studentInfo.firstName!)\", \"lastName\": \"\(studentInfo.lastName!)\",\"mapString\": \"\(studentInfo.mapString!)\", \"mediaURL\": \"\(studentInfo.mediaURL!)\",\"latitude\": \(studentInfo.latitude!), \"longitude\": \(studentInfo.longitude!)}".data(using: .utf8)
+        print(String(data: urlBody!, encoding: .utf8))
+        uploadAPIRequest(apiEndpoints.studentLocation.url, .post, urlBody, studentLocationPOST.self, secure: false){ response, error in
             if let response = response {
                 completion(true, nil)
             } else {
@@ -182,13 +197,17 @@ class udacityAPICalls {
     }
     
     //MARK: Update Students location
-    
-    class func updateStudentLocation(_ objectId: String){
-        let urlBody = StudentInformation(createdAt: "", firstName: "", lastName: "", latitude: 0.0, longitude: 0.0, mapString: "", mediaURL: "", objectId: "", uniqueKey: "", updatedAt: "")
-        var url = apiEndpoints.studentLocation.url
-        url.appendPathComponent(objectId)
-        uploadAPIRequest(url, .put, urlBody, studentLocationPUT.self){ response, error in
-            
+    //In course but not being used. Pin added without
+    class func updateStudentLocation(studentInfo: StudentInformation, completion: @escaping (Bool, Error?) -> Void){
+        let urlBody = studentInfo
+        let url = URL(string: apiEndpoints.user.stringValue + "/" + studentInfo.objectId!)!
+        print(url)
+        uploadAPIRequest(url, .put, urlBody, studentLocationPUT.self, secure: false){ response, error in
+            if let response = response {
+                completion(true, nil)
+            } else {
+                completion(false, error)
+            }
         }
 
     }

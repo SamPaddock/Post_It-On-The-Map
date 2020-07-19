@@ -14,5 +14,5 @@ struct Udacity: Codable {
 
 struct Auth: Codable {
     let username: String
-    let passowrd: String
+    let password: String
 }

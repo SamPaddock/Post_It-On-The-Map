@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC9EAEBD24C19B8700F18464 /* authenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EAEBC24C19B8700F18464 /* authenticationModel.swift */; };
+		FC9EAEBF24C2D7D000F18464 /* responseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EAEBE24C2D7D000F18464 /* responseMessage.swift */; };
 		FCFE8F1B24AB3072005D7D14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F1A24AB3072005D7D14 /* AppDelegate.swift */; };
 		FCFE8F1D24AB3072005D7D14 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F1C24AB3072005D7D14 /* SceneDelegate.swift */; };
 		FCFE8F1F24AB3072005D7D14 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8F1E24AB3072005D7D14 /* LoginViewController.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		FC9EAEBC24C19B8700F18464 /* authenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authenticationModel.swift; sourceTree = "<group>"; };
+		FC9EAEBE24C2D7D000F18464 /* responseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = responseMessage.swift; sourceTree = "<group>"; };
 		FCFE8F1724AB3072005D7D14 /* OnMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFE8F1A24AB3072005D7D14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCFE8F1C24AB3072005D7D14 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				FCFE8F7224BD94CA005D7D14 /* sessionPOST.swift */,
 				FCFE8F7424BD9883005D7D14 /* publicUserDataGET.swift */,
 				FC9EAEBC24C19B8700F18464 /* authenticationModel.swift */,
+				FC9EAEBE24C2D7D000F18464 /* responseMessage.swift */,
 			);
 			path = sessionModel;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				FCFE8F1F24AB3072005D7D14 /* LoginViewController.swift in Sources */,
 				FC9EAEBD24C19B8700F18464 /* authenticationModel.swift in Sources */,
 				FCFE8F6924BC455C005D7D14 /* StudentInformation.swift in Sources */,
+				FC9EAEBF24C2D7D000F18464 /* responseMessage.swift in Sources */,
 				FCFE8F4324AFD988005D7D14 /* MapListTableViewCell.swift in Sources */,
 				FCFE8F8024C0E4CF005D7D14 /* StudentInformationData.swift in Sources */,
 				FCFE8F6E24BC4868005D7D14 /* studentLocationPOSTModel.swift in Sources */,
