@@ -6,7 +6,7 @@ App with a map that shows information posted by other users. A  pin is placed by
 The application is developed to meet the requirments for the forth project in the udacity connect - iOS development course.
 * Implmenting URLSession
 * Download and upload data through sessions and API
-* Using MapKit library to show location op the map
+* Using MapKit library to show location on the map
 
 ### Install
 
